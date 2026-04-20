@@ -1,13 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>youtube-clone</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Clone</title>
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+<body>
+  <header>
+    <div class="left-section">
+      <div class="menu-icon">☰</div>
+      <div class="logo">
+        <span>▶</span> YouTube
+      </div>
+    </div>
+    
+    <div class="middle-section">
+      <form class="search-bar" id="search-form">
+        <input type="search" class="search-input" placeholder="Search" id="search-input">
+        <button type="submit" class="search-btn">🔍</button>
+      </form>
+    </div>
+    
+    <div class="right-section">
+      <div class="profile-icon">U</div>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <nav class="sidebar">
+      <div class="menu-item active">
+        <i class="icon">🏠</i> <span>Home</span>
+      </div>
+      <div class="menu-item">
+        <i class="icon">🔥</i> <span>Trending</span>
+      </div>
+      <div class="menu-item">
+        <i class="icon">📺</i> <span>Subscriptions</span>
+      </div>
+      <div class="divider"></div>
+      <div class="menu-item">
+        <i class="icon">📚</i> <span>Library</span>
+      </div>
+      <div class="menu-item">
+        <i class="icon">⏱️</i> <span>History</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="video-grid" id="video-grid">
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
