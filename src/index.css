@@ -200,18 +200,38 @@ header {
   margin: 12px 8px;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 20px;
+  border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
 .main-content {
   flex: 1;
-  padding: 24px;
+  padding: 32px;
   overflow-y: auto;
   background-color: var(--bg-color);
+  scroll-behavior: smooth;
 }
 
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  row-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  row-gap: 48px;
 }
 
 .video-card {
