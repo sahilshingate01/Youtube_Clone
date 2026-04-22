@@ -146,45 +146,58 @@ header {
 .sidebar {
   width: 240px;
   background-color: var(--nav-bg);
-  padding: 12px 0;
+  padding: 12px 8px;
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  transition: width 0.3s ease;
 }
 
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
+  padding: 12px 16px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
   color: var(--text-color);
-  gap: 20px;
-  border-radius: 10px;
-  margin: 0 12px;
+  gap: 24px;
+  border-radius: 12px;
+  margin-bottom: 4px;
+  transition: var(--transition);
 }
 
 .icon {
-  font-size: 20px;
+  font-size: 22px;
   width: 24px;
   display: flex;
   justify-content: center;
+  transition: transform 0.2s ease;
 }
 
 .menu-item:hover {
   background-color: var(--hover-bg);
 }
 
+.menu-item:hover .icon {
+  transform: scale(1.2);
+}
+
 .menu-item.active {
-  background-color: var(--hover-bg);
-  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff4e45;
+  font-weight: 600;
+}
+
+.menu-item.active .icon {
+  color: var(--accent-color);
 }
 
 .divider {
   height: 1px;
   background-color: var(--border-color);
-  margin: 12px 0;
+  margin: 12px 8px;
 }
 
 .main-content {
