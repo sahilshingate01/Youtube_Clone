@@ -1,18 +1,20 @@
 :root {
-  --bg-color: #f9f9f9;
-  --nav-bg: #ffffff;
-  --text-color: #0f0f0f;
-  --text-secondary: #606060;
+  --bg-color: #0f0f0f;
+  --nav-bg: #0f0f0f;
+  --text-color: #ffffff;
+  --text-secondary: #aaaaaa;
   --accent-color: #ff0000;
-  --border-color: #e5e5e5;
-  --hover-bg: #f2f2f2;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --hover-bg: #272727;
+  --card-bg: #1e1e1e;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', 'Arial', sans-serif;
+  font-family: 'Outfit', 'Inter', 'Roboto', sans-serif;
 }
 
 body {
@@ -101,14 +103,16 @@ header {
 .search-btn {
   height: 40px;
   width: 64px;
-  background-color: #f8f8f8;
+  background-color: var(--hover-bg);
   border: 1px solid var(--border-color);
   border-radius: 0 40px 40px 0;
   cursor: pointer;
+  color: var(--text-color);
+  transition: var(--transition);
 }
 
 .search-btn:hover {
-  background-color: #f0f0f0;
+  background-color: #3f3f3f;
 }
 
 .profile-icon {
