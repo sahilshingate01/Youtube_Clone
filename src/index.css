@@ -238,9 +238,10 @@ header {
 
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 24px;
-  row-gap: 48px;
+  row-gap: 40px;
+  width: 100%;
 }
 
 .video-card {
@@ -278,6 +279,7 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.5s ease;
 }
 
@@ -336,6 +338,10 @@ header {
   .middle-section {
     width: 50%;
   }
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -352,6 +358,14 @@ header {
   .icon {
     width: auto;
   }
+  .main-content {
+    padding: 16px;
+  }
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    row-gap: 32px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -360,5 +374,14 @@ header {
   }
   .search-bar {
     max-width: 180px;
+  }
+  .main-content {
+    padding: 12px;
+    width: 100%;
+  }
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    row-gap: 24px;
   }
 }
