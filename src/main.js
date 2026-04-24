@@ -111,14 +111,17 @@ function renderVideos() {
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
 
-if (searchForm) {
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const query = searchInput.value.trim();
-        if(query) {
-            alert("This is a simplified UI. Searching for: " + query);
-        }
-    });
-}
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const query = searchInput.value.toLowerCase().trim();
+
+    const filteredVideos = videos.filter(video =>
+        video.title.toLowerCase().includes(query) ||
+        video.channel.toLowerCase().includes(query)
+    );
+
+    renderVideos(filteredVideos);
+});
 
 renderVideos();
