@@ -96,6 +96,7 @@ function renderVideos(videoList = videos) {
             </div>
             <div class="video-info">
                 <img src="${video.avatar}" alt="${video.channel}" class="channel-avatar" />
+                
                 <div class="video-details">
                     <h3 class="video-title">${video.title}</h3>
                     <p class="channel-name">${video.channel}</p>

@@ -389,3 +389,12 @@ header {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
+.video-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.8);
+  padding: 3px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+}
