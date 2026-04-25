@@ -126,8 +126,11 @@ searchForm.addEventListener('submit', (e) => {
         video.title.toLowerCase().includes(query) ||
         video.channel.toLowerCase().includes(query)
     );
-
+if(filteredVideos.length === 0){
+    gridContainer.innerHTML = "<h2>No videos found 😢</h2>";
+} else {
     renderVideos(filteredVideos);
+}
 });
 
 renderVideos();
