@@ -1,6 +1,8 @@
 # YouTube Premium Clone
 
-A high-performance, modern YouTube clone built with vanilla JavaScript, featuring a premium design system, glassmorphism aesthetics, and a fully interactive user experience.
+A high-performance, modern YouTube clone built with **React 18**, featuring a premium design system, glassmorphism aesthetics, and a fully interactive user experience.
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-red?style=for-the-badge&logo=vercel)](https://youtube-clone-eight-pink-33.vercel.app/)
 
 ![Project Preview](https://via.placeholder.com/1200x600?text=YouTube+Premium+Clone+Preview)
 
@@ -9,6 +11,7 @@ A high-performance, modern YouTube clone built with vanilla JavaScript, featurin
 - **💎 Premium UI/UX**: Custom design system using the Outfit typeface, featuring glassmorphism effects and smooth micro-animations.
 - **🌓 Adaptive Theme**: Seamless Dark and Light mode switching with automatic persistence in `localStorage`.
 - **📺 Immersive Video Player**: Interactive video modal with a two-column layout, similar to the desktop YouTube experience.
+- **📱 Immersive Shorts**: Dedicated vertical scrolling Shorts feed with scroll-snap and interactive action overlays.
 - **⏭️ Up Next Content**: Integrated related videos sidebar within the player modal for continuous content discovery.
 - **💬 Dynamic Interactions**: 
   - Real-time video search and category filtering.
@@ -19,9 +22,11 @@ A high-performance, modern YouTube clone built with vanilla JavaScript, featurin
 
 ## 🛠️ Tech Stack
 
-- **Core**: Vanilla JavaScript (ES6+), HTML5 Semantic Tags
+- **Core**: React 18, React Router DOM, Vite
 - **Styling**: Modern CSS3 (Custom Variables, Flexbox, CSS Grid)
-- **Tooling**: Vite (Build Tool), ESLint
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Tooling**: ESLint, Vercel (Deployment)
 
 ## 🚀 Getting Started
 
@@ -56,14 +61,21 @@ Ensure you have **Node.js** installed on your system.
 
 ```
 Youtube_Clone/
-├── public/          # Static assets
 ├── src/
-│   ├── assets/      # Image and SVG resources
-│   ├── index.css    # Global styles and theme variables
-│   └── main.js      # Core application logic and data
-├── index.html       # Application entry point
+│   ├── components/  # Reusable UI components (Navbar, Sidebar, etc.)
+│   ├── pages/       # Page-level components (Home, Shorts, etc.)
+│   ├── data.js      # Mock video and comment data
+│   ├── index.css    # Global styles and design system
+│   ├── App.jsx      # Root component and Routing
+│   └── main.jsx     # Application entry point
+├── index.html       # HTML root container
 └── package.json     # Project configuration
 ```
+
+## 🔗 Live Deployment
+
+The project is live and can be accessed at:
+**[https://youtube-clone-eight-pink-33.vercel.app/](https://youtube-clone-eight-pink-33.vercel.app/)**
 
 ## 📜 License
 
