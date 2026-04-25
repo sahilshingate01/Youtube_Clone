@@ -4,7 +4,7 @@ A high-performance, modern YouTube clone built with **React 18**, featuring a pr
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-red?style=for-the-badge&logo=vercel)](https://youtube-clone-eight-pink-33.vercel.app/)
 
-![Project Preview](https://via.placeholder.com/1200x600?text=YouTube+Premium+Clone+Preview)
+![Project Preview](./public/assets/preview.png)
 
 ## ✨ Key Features
 
