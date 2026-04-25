@@ -133,8 +133,13 @@ if(filteredVideos.length === 0){
     renderVideos(filteredVideos);
 }
 });
-document.querySelector('.menu-icon').addEventListener('click', () => {
-  document.querySelector('.sidebar').classList.toggle('collapsed');
+
+
+const menuBtn = document.querySelector('.menu-icon');
+const sidebar = document.querySelector('.sidebar');
+
+menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
 });
 
 renderVideos();

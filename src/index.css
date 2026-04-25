@@ -447,3 +447,33 @@ header {
   background: white;
   color: black;
 }
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+.sidebar.collapsed {
+  width: 70px;
+}
+
+/* Hide text when collapsed */
+.sidebar.collapsed .menu-item span {
+  display: none;
+}
+
+/* Center icons */
+.sidebar.collapsed .menu-item {
+  justify-content: center;
+}
+
+/* Optional: smooth transition */
+.sidebar {
+  transition: width 0.3s ease;
+}
