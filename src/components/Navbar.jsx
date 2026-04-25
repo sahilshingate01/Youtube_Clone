@@ -21,25 +21,32 @@ const Navbar = ({ theme, toggleTheme, setSearchQuery, toggleSidebar }) => {
       <div className="middle-section">
         <form className="search-bar" onSubmit={handleSubmit}>
           <div className="search-wrapper">
-            <input name="search" className="search-input" placeholder="Search videos..." />
+            <input name="search" className="search-input" placeholder="Search" />
             <button type="submit" className="search-icon">
               <Search size={18} />
             </button>
+          </div>
+          <div className="mic-icon" title="Search with your voice">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"></path><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"></path></svg>
           </div>
         </form>
       </div>
       
       <div className="right-section">
-        <div className="theme-toggle" onClick={toggleTheme} title="Switch Theme">
-          {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+        <div className="create-btn" title="Create">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>Create</span>
         </div>
-        <div className="menu-icon" title="Create">
-          <Video size={24} />
+        <div className="theme-toggle" onClick={toggleTheme} title="Switch Theme">
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
         </div>
         <div className="menu-icon" title="Notifications">
-          <Bell size={24} />
+          <div className="notif-count">9+</div>
+          <Bell size={22} />
         </div>
-        <div className="profile-icon">S</div>
+        <div className="profile-icon user-avatar">
+          <img src="https://picsum.photos/32/32?random=99" alt="user" />
+        </div>
       </div>
     </header>
   );
