@@ -126,8 +126,140 @@ const modalDesc = document.getElementById('modal-desc');
 const commentsList = document.getElementById('comments-list');
 const subscribeBtn = document.getElementById('subscribe-btn');
 
-function renderVideos(videoList = videos) {
-    gridContainer.innerHTML = '';
+// Navigation Logic
+const menuItems = document.querySelectorAll('.sidebar .menu-item');
+const mainContent = document.querySelector('.main-content');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        
+        const pageName = item.querySelector('span').textContent.toLowerCase();
+        switchPage(pageName);
+    });
+});
+
+function switchPage(page) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    switch(page) {
+        case 'home':
+            renderHomePage();
+            break;
+        case 'shorts':
+            renderShortsPage();
+            break;
+        case 'subscriptions':
+            renderSubscriptionsPage();
+            break;
+        case 'library':
+        case 'history':
+        case 'liked videos':
+            renderLibraryPage(page);
+            break;
+        default:
+            renderHomePage();
+    }
+}
+
+function renderHomePage() {
+    mainContent.innerHTML = `
+        <div class="filter-bar">
+            <button class="filter active">All</button>
+            <button class="filter">Music</button>
+            <button class="filter">Coding</button>
+            <button class="filter">Tech</button>
+            <button class="filter">Gaming</button>
+            <button class="filter">AI</button>
+            <button class="filter">Live</button>
+            <button class="filter">Podcasts</button>
+        </div>
+        <div class="video-grid" id="video-grid"></div>
+    `;
+    
+    // Re-attach filter listeners
+    const filters = document.querySelectorAll('.filter');
+    filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            filters.forEach(f => f.classList.remove('active'));
+            filter.classList.add('active');
+            const category = filter.textContent.toLowerCase();
+            const grid = document.getElementById('video-grid');
+            if (category === 'all') {
+                renderVideos(videos, grid);
+            } else {
+                const filtered = videos.filter(v => 
+                    v.title.toLowerCase().includes(category) || 
+                    v.channel.toLowerCase().includes(category)
+                );
+                renderVideos(filtered, grid);
+            }
+        });
+    });
+
+    renderVideos(videos, document.getElementById('video-grid'));
+}
+
+function renderShortsPage() {
+    const shortsData = [
+        { id: 101, title: "How to use Grid", channel: "DesignPro", views: "2M", thumb: "https://picsum.photos/400/700?random=101" },
+        { id: 102, title: "Keyboard ASMR", channel: "KeyClack", views: "500K", thumb: "https://picsum.photos/400/700?random=102" },
+        { id: 103, title: "AI is taking over!", channel: "FutureTech", views: "1.2M", thumb: "https://picsum.photos/400/700?random=103" }
+    ];
+
+    mainContent.innerHTML = `
+        <div class="shorts-container">
+            ${shortsData.map(short => `
+                <div class="short-video">
+                    <img src="${short.thumb}" alt="${short.title}" />
+                    <div class="short-info">
+                        <h3>${short.title}</h3>
+                        <p>${short.channel} • ${short.views} views</p>
+                    </div>
+                    <div class="short-actions">
+                        <div class="s-action"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg><span>Like</span></div>
+                        <div class="s-action"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zM17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path></svg><span>Dislike</span></div>
+                        <div class="s-action"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg><span>Comment</span></div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderSubscriptionsPage() {
+    mainContent.innerHTML = `
+        <div class="subscriptions-page">
+            <div class="sub-header">
+                <h2>Latest</h2>
+                <div class="sub-view-options">
+                    <button class="active">Grid</button>
+                    <button>List</button>
+                </div>
+            </div>
+            <div class="video-grid" id="sub-grid"></div>
+        </div>
+    `;
+    renderVideos(videos.slice(0, 3), document.getElementById('sub-grid'));
+}
+
+function renderLibraryPage(title) {
+    mainContent.innerHTML = `
+        <div class="library-page">
+            <div class="lib-header">
+                <h2>${title.charAt(0).toUpperCase() + title.slice(1)}</h2>
+            </div>
+            <div class="video-grid" id="lib-grid"></div>
+        </div>
+    `;
+    renderVideos(videos.slice(3, 6), document.getElementById('lib-grid'));
+}
+
+// Update renderVideos to accept a container
+function renderVideos(videoList = videos, container = document.getElementById('video-grid')) {
+    if (!container) return;
+    container.innerHTML = '';
 
     videoList.forEach((video, index) => {
         const card = document.createElement('div');
@@ -155,194 +287,11 @@ function renderVideos(videoList = videos) {
         `;
 
         card.addEventListener('click', () => openVideoModal(video));
-        gridContainer.appendChild(card);
+        container.appendChild(card);
     });
 }
 
-const relatedVideosContainer = document.getElementById('related-videos');
-
-function openVideoModal(video) {
-    modalThumbnail.src = video.thumbnail;
-    modalTitle.textContent = video.title;
-    modalAvatar.src = video.avatar;
-    modalChannel.textContent = video.channel;
-    modalSubs.textContent = `${video.subscribers || '1.2M'} subscribers`;
-    modalViews.textContent = `${video.views} • ${video.time}`;
-    modalDesc.textContent = video.description || "No description available for this video.";
-
-    renderComments();
-    renderRelatedVideos(video.id);
-    
-    videoModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function renderRelatedVideos(currentId) {
-    const related = videos.filter(v => v.id !== currentId);
-    relatedVideosContainer.innerHTML = related.map(v => `
-        <div class="related-video-card" data-id="${v.id}">
-            <img src="${v.thumbnail}" alt="${v.title}" class="related-thumb" />
-            <div class="related-info">
-                <h4>${v.title}</h4>
-                <p>${v.channel}</p>
-                <p>${v.views} • ${v.time}</p>
-            </div>
-        </div>
-    `).join('');
-
-    // Add click events to related videos
-    relatedVideosContainer.querySelectorAll('.related-video-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            const id = parseInt(card.getAttribute('data-id'));
-            const video = videos.find(v => v.id === id);
-            if (video) {
-                // Smooth transition: scroll modal to top and update content
-                videoModal.scrollTo({ top: 0, behavior: 'smooth' });
-                openVideoModal(video);
-            }
-        });
-    });
-}
-
-
-function renderComments() {
-    commentsList.innerHTML = mockComments.map(comment => `
-        <div class="comment">
-            <img src="${comment.avatar}" alt="${comment.user}" class="channel-avatar" style="width: 32px; height: 32px;" />
-            <div class="comment-info">
-                <h5>${comment.user} • <span>${comment.time}</span></h5>
-                <p>${comment.text}</p>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Like/Dislike Functionality
-const likeBtn = document.querySelector('.action-btn:nth-child(1)');
-const dislikeBtn = document.querySelector('.action-btn:nth-child(2)');
-let isLiked = false;
-let isDisliked = false;
-
-likeBtn.addEventListener('click', () => {
-    isLiked = !isLiked;
-    if (isLiked) {
-        isDisliked = false;
-        likeBtn.style.color = 'var(--accent-color)';
-        likeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
-        dislikeBtn.style.color = 'white';
-        dislikeBtn.querySelector('svg').style.fill = 'none';
-        
-        // Add a little pop animation
-        likeBtn.style.transform = 'scale(1.2)';
-        setTimeout(() => likeBtn.style.transform = 'scale(1)', 200);
-    } else {
-        likeBtn.style.color = 'white';
-        likeBtn.querySelector('svg').style.fill = 'none';
-    }
-});
-
-dislikeBtn.addEventListener('click', () => {
-    isDisliked = !isDisliked;
-    if (isDisliked) {
-        isLiked = false;
-        dislikeBtn.style.color = 'var(--accent-color)';
-        dislikeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
-        likeBtn.style.color = 'white';
-        likeBtn.querySelector('svg').style.fill = 'none';
-    } else {
-        dislikeBtn.style.color = 'white';
-        dislikeBtn.querySelector('svg').style.fill = 'none';
-    }
-});
-
-// Close modal logic
-closeModal.addEventListener('click', () => {
-    videoModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    // Reset likes for next video (in a real app these would be per-video)
-    isLiked = false;
-    isDisliked = false;
-    likeBtn.style.color = 'white';
-    likeBtn.querySelector('svg').style.fill = 'none';
-    dislikeBtn.style.color = 'white';
-    dislikeBtn.querySelector('svg').style.fill = 'none';
-});
-
-
-// Close modal on background click
-videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-        videoModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Subscribe Functionality
-subscribeBtn.addEventListener('click', () => {
-    subscribeBtn.classList.toggle('subscribed');
-    if (subscribeBtn.classList.contains('subscribed')) {
-        subscribeBtn.textContent = 'Subscribed';
-        subscribeBtn.style.background = 'var(--hover-bg)';
-        subscribeBtn.style.color = 'white';
-    } else {
-        subscribeBtn.textContent = 'Subscribe';
-        subscribeBtn.style.background = 'white';
-        subscribeBtn.style.color = 'black';
-    }
-});
-
-// Search Logic
-const searchForm = document.getElementById('search-form');
-const searchInput = document.querySelector('.search-input');
-
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const query = searchInput.value.toLowerCase().trim();
-    const filteredVideos = videos.filter(video =>
-        video.title.toLowerCase().includes(query) ||
-        video.channel.toLowerCase().includes(query)
-    );
-
-    if (filteredVideos.length === 0) {
-        gridContainer.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
-                <h2 style="font-size: 48px; margin-bottom: 16px;">🔍</h2>
-                <h2>No videos found for "${searchInput.value}"</h2>
-                <p style="color: var(--text-secondary); margin-top: 8px;">Try searching for something else</p>
-            </div>
-        `;
-    } else {
-        renderVideos(filteredVideos);
-    }
-});
-
-// Sidebar Toggle
-const menuBtn = document.querySelector('.menu-icon');
-const sidebar = document.querySelector('.sidebar');
-
-menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-});
-
-// Filter Bar
-const filters = document.querySelectorAll('.filter');
-filters.forEach(filter => {
-    filter.addEventListener('click', () => {
-        filters.forEach(f => f.classList.remove('active'));
-        filter.classList.add('active');
-        const category = filter.textContent.toLowerCase();
-        if (category === 'all') {
-            renderVideos(videos);
-        } else {
-            const filtered = videos.filter(v => 
-                v.title.toLowerCase().includes(category) || 
-                v.channel.toLowerCase().includes(category)
-            );
-            renderVideos(filtered);
-        }
-    });
-});
-
-renderVideos();
+// Modify initial render call
+renderHomePage();
 
 

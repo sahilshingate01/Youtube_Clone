@@ -814,3 +814,106 @@ header {
 
 [data-theme="light"] .sun-icon { display: none; }
 [data-theme="light"] .moon-icon { display: flex; }
+
+/* Shorts Page Styles */
+.shorts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.short-video {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: var(--shadow-lg);
+}
+
+.short-video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.short-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: white;
+}
+
+.short-info h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.short-info p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.short-actions {
+  position: absolute;
+  right: 12px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.s-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.s-action span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Subscriptions & Library Pages */
+.subscriptions-page, .library-page {
+  padding: 24px;
+}
+
+.sub-header, .lib-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sub-view-options {
+  display: flex;
+  gap: 8px;
+}
+
+.sub-view-options button {
+  background: var(--hover-bg);
+  border: none;
+  color: var(--text-color);
+  padding: 6px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.sub-view-options button.active {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
