@@ -703,3 +703,82 @@ header {
     border-radius: 0;
   }
 }
+
+/* Two-column layout for modal */
+.player-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-col {
+  flex: 2.5;
+  border-right: 1px solid var(--border-color);
+}
+
+.right-col {
+  flex: 1;
+  padding: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.right-col h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.related-video-card {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.related-video-card:hover {
+  background: var(--hover-bg);
+}
+
+.related-thumb {
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.related-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.related-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-info p {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+  .player-container {
+    flex-direction: column;
+  }
+  .left-col {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .right-col {
+    width: 100%;
+  }
+}

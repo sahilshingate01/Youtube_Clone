@@ -133,6 +133,8 @@ function renderVideos(videoList = videos) {
     });
 }
 
+const relatedVideosContainer = document.getElementById('related-videos');
+
 function openVideoModal(video) {
     modalThumbnail.src = video.thumbnail;
     modalTitle.textContent = video.title;
@@ -143,10 +145,39 @@ function openVideoModal(video) {
     modalDesc.textContent = video.description || "No description available for this video.";
 
     renderComments();
+    renderRelatedVideos(video.id);
     
     videoModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
 }
+
+function renderRelatedVideos(currentId) {
+    const related = videos.filter(v => v.id !== currentId);
+    relatedVideosContainer.innerHTML = related.map(v => `
+        <div class="related-video-card" data-id="${v.id}">
+            <img src="${v.thumbnail}" alt="${v.title}" class="related-thumb" />
+            <div class="related-info">
+                <h4>${v.title}</h4>
+                <p>${v.channel}</p>
+                <p>${v.views} • ${v.time}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // Add click events to related videos
+    relatedVideosContainer.querySelectorAll('.related-video-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const id = parseInt(card.getAttribute('data-id'));
+            const video = videos.find(v => v.id === id);
+            if (video) {
+                // Smooth transition: scroll modal to top and update content
+                videoModal.scrollTo({ top: 0, behavior: 'smooth' });
+                openVideoModal(video);
+            }
+        });
+    });
+}
+
 
 function renderComments() {
     commentsList.innerHTML = mockComments.map(comment => `
