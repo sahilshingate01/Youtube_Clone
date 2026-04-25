@@ -1,16 +1,70 @@
-# React + Vite
+# YouTube Premium Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, modern YouTube clone built with vanilla JavaScript, featuring a premium design system, glassmorphism aesthetics, and a fully interactive user experience.
 
-Currently, two official plugins are available:
+![Project Preview](https://via.placeholder.com/1200x600?text=YouTube+Premium+Clone+Preview)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Key Features
 
-## React Compiler
+- **💎 Premium UI/UX**: Custom design system using the Outfit typeface, featuring glassmorphism effects and smooth micro-animations.
+- **🌓 Adaptive Theme**: Seamless Dark and Light mode switching with automatic persistence in `localStorage`.
+- **📺 Immersive Video Player**: Interactive video modal with a two-column layout, similar to the desktop YouTube experience.
+- **⏭️ Up Next Content**: Integrated related videos sidebar within the player modal for continuous content discovery.
+- **💬 Dynamic Interactions**: 
+  - Real-time video search and category filtering.
+  - Interactive Like/Dislike system with pop animations.
+  - Functional mock subscription system.
+  - Dynamically rendered comment sections.
+- **📱 Fully Responsive**: Optimized for all screen sizes, from mobile devices to ultra-wide desktops.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Core**: Vanilla JavaScript (ES6+), HTML5 Semantic Tags
+- **Styling**: Modern CSS3 (Custom Variables, Flexbox, CSS Grid)
+- **Tooling**: Vite (Build Tool), ESLint
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have **Node.js** installed on your system.
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sahilshingate01/Youtube_Clone.git
+   cd Youtube_Clone
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+## 📁 Project Structure
+
+```
+Youtube_Clone/
+├── public/          # Static assets
+├── src/
+│   ├── assets/      # Image and SVG resources
+│   ├── index.css    # Global styles and theme variables
+│   └── main.js      # Core application logic and data
+├── index.html       # Application entry point
+└── package.json     # Project configuration
+```
+
+## 📜 License
+
+This project is open-source and available under the [MIT License](LICENSE).
