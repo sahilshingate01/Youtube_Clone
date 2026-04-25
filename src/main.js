@@ -160,10 +160,57 @@ function renderComments() {
     `).join('');
 }
 
+// Like/Dislike Functionality
+const likeBtn = document.querySelector('.action-btn:nth-child(1)');
+const dislikeBtn = document.querySelector('.action-btn:nth-child(2)');
+let isLiked = false;
+let isDisliked = false;
+
+likeBtn.addEventListener('click', () => {
+    isLiked = !isLiked;
+    if (isLiked) {
+        isDisliked = false;
+        likeBtn.style.color = 'var(--accent-color)';
+        likeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
+        dislikeBtn.style.color = 'white';
+        dislikeBtn.querySelector('svg').style.fill = 'none';
+        
+        // Add a little pop animation
+        likeBtn.style.transform = 'scale(1.2)';
+        setTimeout(() => likeBtn.style.transform = 'scale(1)', 200);
+    } else {
+        likeBtn.style.color = 'white';
+        likeBtn.querySelector('svg').style.fill = 'none';
+    }
+});
+
+dislikeBtn.addEventListener('click', () => {
+    isDisliked = !isDisliked;
+    if (isDisliked) {
+        isLiked = false;
+        dislikeBtn.style.color = 'var(--accent-color)';
+        dislikeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
+        likeBtn.style.color = 'white';
+        likeBtn.querySelector('svg').style.fill = 'none';
+    } else {
+        dislikeBtn.style.color = 'white';
+        dislikeBtn.querySelector('svg').style.fill = 'none';
+    }
+});
+
+// Close modal logic
 closeModal.addEventListener('click', () => {
     videoModal.classList.remove('active');
     document.body.style.overflow = 'auto';
+    // Reset likes for next video (in a real app these would be per-video)
+    isLiked = false;
+    isDisliked = false;
+    likeBtn.style.color = 'white';
+    likeBtn.querySelector('svg').style.fill = 'none';
+    dislikeBtn.style.color = 'white';
+    dislikeBtn.querySelector('svg').style.fill = 'none';
 });
+
 
 // Close modal on background click
 videoModal.addEventListener('click', (e) => {
