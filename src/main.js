@@ -1,3 +1,29 @@
+// Theme Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const sunIcon = themeToggle.querySelector('.sun-icon');
+const moonIcon = themeToggle.querySelector('.moon-icon');
+
+// Initialize theme
+const currentTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', currentTheme);
+updateThemeIcons(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeIcons(theme);
+});
+
+function updateThemeIcons(theme) {
+    if (theme === 'light') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'flex';
+    } else {
+        sunIcon.style.display = 'flex';
+        moonIcon.style.display = 'none';
+    }
+}
 const videos = [
     {
         id: 1,
@@ -12,7 +38,7 @@ const videos = [
         description: "In this tutorial, we will learn how to build a fully responsive YouTube clone using only HTML and CSS. We will cover layout, grid, and modern design techniques.",
         subscribers: "250K"
     },
-    {
+
         id: 2,
         title: "Top 10 Web Development Trends in 2026",
         channel: "Tech Insights",

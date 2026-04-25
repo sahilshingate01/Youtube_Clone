@@ -782,3 +782,35 @@ header {
     width: 100%;
   }
 }
+
+/* Light Mode Variables */
+[data-theme="light"] {
+  --bg-color: #f9f9f9;
+  --nav-bg: #ffffff;
+  --text-color: #0f0f0f;
+  --text-secondary: #606060;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --card-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+}
+
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+[data-theme="light"] .sun-icon { display: none; }
+[data-theme="light"] .moon-icon { display: flex; }
