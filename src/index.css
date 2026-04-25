@@ -250,8 +250,8 @@ header {
   cursor: pointer;
   background: transparent;
   transition: var(--transition);
-  padding: 10px;
-  border-radius: 16px;
+  padding: 0px;
+  border-radius: 0px;
   animation: fadeIn 0.5s ease forwards;
 }
 
@@ -405,4 +405,7 @@ header {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.sidebar.collapsed {
+  width: 72px;
 }
