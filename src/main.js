@@ -101,8 +101,13 @@ function renderVideos(videoList = videos) {
                     <h3 class="video-title">${video.title}</h3>
                     <p class="channel-name">${video.channel}</p>
                     <p class="video-stats">${video.views} • ${video.time}</p>
+
                 </div>
+                
             </div>
+            <p class="channel-name">
+  ${video.channel} <span class="verified"> ⭐️ </span>
+</p>
         `;
 
         gridContainer.appendChild(card);
