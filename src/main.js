@@ -92,8 +92,9 @@ function renderVideos(videoList = videos) {
 
         card.innerHTML = `
             <div class="thumbnail-container">
-                <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail" />
-            </div>
+    <img src="${video.thumbnail}" class="thumbnail" />
+    <div class="progress-bar"></div>
+</div>
             <div class="video-info">
                 <img src="${video.avatar}" alt="${video.channel}" class="channel-avatar" />
                 
