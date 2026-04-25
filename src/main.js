@@ -83,10 +83,10 @@ const videos = [
 
 const gridContainer = document.getElementById('video-grid');
 
-function renderVideos() {
+function renderVideos(videoList = videos) {
     gridContainer.innerHTML = '';
 
-    videos.forEach(video => {
+    videoList.forEach(video => {
         const card = document.createElement('div');
         card.classList.add('video-card');
 
