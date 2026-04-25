@@ -38,7 +38,7 @@ const videos = [
         description: "In this tutorial, we will learn how to build a fully responsive YouTube clone using only HTML and CSS. We will cover layout, grid, and modern design techniques.",
         subscribers: "250K"
     },
-
+    {
         id: 2,
         title: "Top 10 Web Development Trends in 2026",
         channel: "Tech Insights",
