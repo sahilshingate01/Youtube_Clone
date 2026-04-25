@@ -1,107 +1,104 @@
 const videos = [
     {
+        id: 1,
         title: "How to Build a YouTube Clone in HTML & CSS",
         channel: "Code Beginner",
         views: "1.2M views",
         time: "1 year ago",
-        thumbnail: "https://picsum.photos/400/225?random=1",
+        thumbnail: "https://picsum.photos/800/450?random=1",
         avatar: "https://picsum.photos/40/40?random=11",
         verified: true,
-        progress: 40
+        progress: 40,
+        description: "In this tutorial, we will learn how to build a fully responsive YouTube clone using only HTML and CSS. We will cover layout, grid, and modern design techniques.",
+        subscribers: "250K"
     },
     {
+        id: 2,
         title: "Top 10 Web Development Trends in 2026",
         channel: "Tech Insights",
         views: "850K views",
         time: "2 months ago",
-        thumbnail: "https://picsum.photos/400/225?random=2",
+        thumbnail: "https://picsum.photos/800/450?random=2",
         avatar: "https://picsum.photos/40/40?random=12",
         verified: true,
-        progress: 0
+        progress: 0,
+        description: "Discover the latest trends in web development for 2026. From AI-driven interfaces to WebGPU and beyond.",
+        subscribers: "1.1M"
     },
     {
+        id: 3,
         title: "Relaxing Lofi Music for Coding & Studying",
         channel: "Lofi Beats",
         views: "5.4M views",
         time: "3 years ago",
-        thumbnail: "https://picsum.photos/400/225?random=3",
+        thumbnail: "https://picsum.photos/800/450?random=3",
         avatar: "https://picsum.photos/40/40?random=13",
         verified: false,
-        progress: 85
+        progress: 85,
+        description: "The perfect lofi beats to keep you focused while coding, studying, or relaxing. Updated weekly with fresh tracks.",
+        subscribers: "4.2M"
     },
     {
+        id: 4,
         title: "CSS Grid Complete Tutorial",
         channel: "Design Masters",
         views: "420K views",
         time: "5 months ago",
-        thumbnail: "https://picsum.photos/400/225?random=4",
+        thumbnail: "https://picsum.photos/800/450?random=4",
         avatar: "https://picsum.photos/40/40?random=14",
         verified: true,
-        progress: 0
+        progress: 0,
+        description: "Master CSS Grid Layout in this comprehensive guide. We cover everything from the basics to advanced layouts.",
+        subscribers: "890K"
     },
     {
+        id: 5,
         title: "Minimalist Desk Setup Tour 2026",
         channel: "Tech Spaces",
         views: "2.1M views",
         time: "1 month ago",
-        thumbnail: "https://picsum.photos/400/225?random=5",
+        thumbnail: "https://picsum.photos/800/450?random=5",
         avatar: "https://picsum.photos/40/40?random=15",
         verified: true,
-        progress: 10
+        progress: 10,
+        description: "A tour of my 2026 minimalist desk setup. Focused on productivity and clean aesthetics.",
+        subscribers: "340K"
     },
     {
+        id: 6,
         title: "JavaScript Async/Await Explained in 10 Minutes",
         channel: "JS Simplified",
         views: "930K views",
         time: "8 months ago",
-        thumbnail: "https://picsum.photos/400/225?random=6",
+        thumbnail: "https://picsum.photos/800/450?random=6",
         avatar: "https://picsum.photos/40/40?random=16",
         verified: true,
-        progress: 0
-    },
-    {
-        title: "I Built a Smart Home from Scratch",
-        channel: "DIY Tech",
-        views: "3.5M views",
-        time: "1 year ago",
-        thumbnail: "https://picsum.photos/400/225?random=7",
-        avatar: "https://picsum.photos/40/40?random=17",
-        verified: false,
-        progress: 60
-    },
-    {
-        title: "Learn React in 2026 - Crash Course",
-        channel: "Frontend Pro",
-        views: "1.8M views",
-        time: "6 months ago",
-        thumbnail: "https://picsum.photos/400/225?random=8",
-        avatar: "https://picsum.photos/40/40?random=18",
-        verified: true,
-        progress: 0
-    },
-    {
-        title: "Why You Should Learn Vim in 2026",
-        channel: "Terminal Wizard",
-        views: "210K views",
-        time: "3 weeks ago",
-        thumbnail: "https://picsum.photos/400/225?random=9",
-        avatar: "https://picsum.photos/40/40?random=19",
-        verified: true,
-        progress: 95
-    },
-    {
-        title: "The Future of Artificial Intelligence",
-        channel: "AI Today",
-        views: "2.7M views",
-        time: "10 months ago",
-        thumbnail: "https://picsum.photos/400/225?random=10",
-        avatar: "https://picsum.photos/40/40?random=20",
-        verified: true,
-        progress: 0
+        progress: 0,
+        description: "Learn how to use Async and Await in JavaScript to write cleaner asynchronous code. Quick and easy explanation.",
+        subscribers: "1.5M"
     }
 ];
 
+const mockComments = [
+    { user: "DevGuru", text: "This is exactly what I was looking for! Thanks for sharing.", time: "2 hours ago", avatar: "https://picsum.photos/32/32?random=50" },
+    { user: "Alice Codes", text: "Love the minimalist design of this clone. Keep it up!", time: "5 hours ago", avatar: "https://picsum.photos/32/32?random=51" },
+    { user: "TechFan", text: "Can you do a video on React next? Great content.", time: "1 day ago", avatar: "https://picsum.photos/32/32?random=52" }
+];
+
 const gridContainer = document.getElementById('video-grid');
+const videoModal = document.getElementById('video-modal');
+const closeModal = document.getElementById('close-modal');
+
+// Modal Elements
+const modalThumbnail = document.getElementById('modal-thumbnail');
+const modalTitle = document.getElementById('modal-title');
+const modalAvatar = document.getElementById('modal-avatar');
+const modalChannel = document.getElementById('modal-channel');
+const modalSubs = document.getElementById('modal-subs');
+const modalViews = document.getElementById('modal-views');
+const modalDesc = document.getElementById('modal-desc');
+const commentsList = document.getElementById('comments-list');
+const subscribeBtn = document.getElementById('subscribe-btn');
 
 function renderVideos(videoList = videos) {
     gridContainer.innerHTML = '';
@@ -131,18 +128,72 @@ function renderVideos(videoList = videos) {
             </div>
         `;
 
+        card.addEventListener('click', () => openVideoModal(video));
         gridContainer.appendChild(card);
     });
 }
 
+function openVideoModal(video) {
+    modalThumbnail.src = video.thumbnail;
+    modalTitle.textContent = video.title;
+    modalAvatar.src = video.avatar;
+    modalChannel.textContent = video.channel;
+    modalSubs.textContent = `${video.subscribers || '1.2M'} subscribers`;
+    modalViews.textContent = `${video.views} • ${video.time}`;
+    modalDesc.textContent = video.description || "No description available for this video.";
+
+    renderComments();
+    
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function renderComments() {
+    commentsList.innerHTML = mockComments.map(comment => `
+        <div class="comment">
+            <img src="${comment.avatar}" alt="${comment.user}" class="channel-avatar" style="width: 32px; height: 32px;" />
+            <div class="comment-info">
+                <h5>${comment.user} • <span>${comment.time}</span></h5>
+                <p>${comment.text}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+closeModal.addEventListener('click', () => {
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Close modal on background click
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        videoModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Subscribe Functionality
+subscribeBtn.addEventListener('click', () => {
+    subscribeBtn.classList.toggle('subscribed');
+    if (subscribeBtn.classList.contains('subscribed')) {
+        subscribeBtn.textContent = 'Subscribed';
+        subscribeBtn.style.background = 'var(--hover-bg)';
+        subscribeBtn.style.color = 'white';
+    } else {
+        subscribeBtn.textContent = 'Subscribe';
+        subscribeBtn.style.background = 'white';
+        subscribeBtn.style.color = 'black';
+    }
+});
+
+// Search Logic
 const searchForm = document.getElementById('search-form');
 const searchInput = document.querySelector('.search-input');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const query = searchInput.value.toLowerCase().trim();
-
     const filteredVideos = videos.filter(video =>
         video.title.toLowerCase().includes(query) ||
         video.channel.toLowerCase().includes(query)
@@ -169,14 +220,12 @@ menuBtn.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
 });
 
-// Filter Bar Interaction
+// Filter Bar
 const filters = document.querySelectorAll('.filter');
 filters.forEach(filter => {
     filter.addEventListener('click', () => {
         filters.forEach(f => f.classList.remove('active'));
         filter.classList.add('active');
-        
-        // Simple mock filtering
         const category = filter.textContent.toLowerCase();
         if (category === 'all') {
             renderVideos(videos);
@@ -191,4 +240,5 @@ filters.forEach(filter => {
 });
 
 renderVideos();
+
 

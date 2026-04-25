@@ -90,6 +90,66 @@
     </main>
   </div>
 
+  <div class="video-modal" id="video-modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div class="player-container">
+        <div class="main-video">
+          <img id="modal-thumbnail" src="" alt="Video Title" />
+          <div class="play-overlay">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </div>
+        </div>
+        
+        <div class="modal-video-details">
+          <h2 id="modal-title">Video Title</h2>
+          <div class="modal-video-meta">
+            <div class="channel-info">
+              <img id="modal-avatar" src="" alt="Channel" />
+              <div>
+                <h4 id="modal-channel">Channel Name</h4>
+                <p id="modal-subs">1.2M subscribers</p>
+              </div>
+              <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+            </div>
+            <div class="video-actions">
+              <button class="action-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                <span>Likes</span>
+              </button>
+              <button class="action-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zM17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path></svg>
+              </button>
+              <button class="action-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                <span>Share</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="video-description">
+            <p id="modal-views">1.2M views • 1 year ago</p>
+            <p id="modal-desc">This is a mock description for the video. In a real app, this would be fetched from an API.</p>
+          </div>
+          
+          <div class="comments-section">
+            <h3>Comments</h3>
+            <div class="add-comment">
+              <div class="profile-icon">S</div>
+              <input type="text" placeholder="Add a comment..." />
+            </div>
+            <div class="comments-list" id="comments-list">
+              <!-- Comments will be rendered here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
