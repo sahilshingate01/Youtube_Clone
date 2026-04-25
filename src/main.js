@@ -295,3 +295,166 @@ function renderVideos(videoList = videos, container = document.getElementById('v
 renderHomePage();
 
 
+
+const relatedVideosContainer = document.getElementById('related-videos');
+
+function openVideoModal(video) {
+    modalThumbnail.src = video.thumbnail;
+    modalTitle.textContent = video.title;
+    modalAvatar.src = video.avatar;
+    modalChannel.textContent = video.channel;
+    modalSubs.textContent = `${video.subscribers || '1.2M'} subscribers`;
+    modalViews.textContent = `${video.views} • ${video.time}`;
+    modalDesc.textContent = video.description || "No description available for this video.";
+
+    renderComments();
+    renderRelatedVideos(video.id);
+    
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function renderRelatedVideos(currentId) {
+    const related = videos.filter(v => v.id !== currentId);
+    relatedVideosContainer.innerHTML = related.map(v => `
+        <div class="related-video-card" data-id="${v.id}">
+            <img src="${v.thumbnail}" alt="${v.title}" class="related-thumb" />
+            <div class="related-info">
+                <h4>${v.title}</h4>
+                <p>${v.channel}</p>
+                <p>${v.views} • ${v.time}</p>
+            </div>
+        </div>
+    `).join('');
+
+    relatedVideosContainer.querySelectorAll('.related-video-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const id = parseInt(card.getAttribute('data-id'));
+            const video = videos.find(v => v.id === id);
+            if (video) {
+                videoModal.scrollTo({ top: 0, behavior: 'smooth' });
+                openVideoModal(video);
+            }
+        });
+    });
+}
+
+function renderComments() {
+    commentsList.innerHTML = mockComments.map(comment => `
+        <div class="comment">
+            <img src="${comment.avatar}" alt="${comment.user}" class="channel-avatar" style="width: 32px; height: 32px;" />
+            <div class="comment-info">
+                <h5>${comment.user} • <span>${comment.time}</span></h5>
+                <p>${comment.text}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Like/Dislike Functionality
+const likeBtn = document.querySelector('.action-btn:nth-child(1)');
+const dislikeBtn = document.querySelector('.action-btn:nth-child(2)');
+let isLiked = false;
+let isDisliked = false;
+
+likeBtn.addEventListener('click', () => {
+    isLiked = !isLiked;
+    if (isLiked) {
+        isDisliked = false;
+        likeBtn.style.color = 'var(--accent-color)';
+        likeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
+        dislikeBtn.style.color = 'white';
+        dislikeBtn.querySelector('svg').style.fill = 'none';
+        likeBtn.style.transform = 'scale(1.2)';
+        setTimeout(() => likeBtn.style.transform = 'scale(1)', 200);
+    } else {
+        likeBtn.style.color = 'white';
+        likeBtn.querySelector('svg').style.fill = 'none';
+    }
+});
+
+dislikeBtn.addEventListener('click', () => {
+    isDisliked = !isDisliked;
+    if (isDisliked) {
+        isLiked = false;
+        dislikeBtn.style.color = 'var(--accent-color)';
+        dislikeBtn.querySelector('svg').style.fill = 'var(--accent-color)';
+        likeBtn.style.color = 'white';
+        likeBtn.querySelector('svg').style.fill = 'none';
+    } else {
+        dislikeBtn.style.color = 'white';
+        dislikeBtn.querySelector('svg').style.fill = 'none';
+    }
+});
+
+closeModal.addEventListener('click', () => {
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    isLiked = false;
+    isDisliked = false;
+    likeBtn.style.color = 'white';
+    likeBtn.querySelector('svg').style.fill = 'none';
+    dislikeBtn.style.color = 'white';
+    dislikeBtn.querySelector('svg').style.fill = 'none';
+});
+
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        videoModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+subscribeBtn.addEventListener('click', () => {
+    subscribeBtn.classList.toggle('subscribed');
+    if (subscribeBtn.classList.contains('subscribed')) {
+        subscribeBtn.textContent = 'Subscribed';
+        subscribeBtn.style.background = 'var(--hover-bg)';
+        subscribeBtn.style.color = 'white';
+    } else {
+        subscribeBtn.textContent = 'Subscribe';
+        subscribeBtn.style.background = 'white';
+        subscribeBtn.style.color = 'black';
+    }
+});
+
+// Search Logic
+const searchForm = document.getElementById('search-form');
+const searchInput = document.querySelector('.search-input');
+
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const query = searchInput.value.toLowerCase().trim();
+    
+    // Switch to home page if not already there to show results
+    const homeItem = document.querySelector('.sidebar .menu-item:first-child');
+    menuItems.forEach(i => i.classList.remove('active'));
+    homeItem.classList.add('active');
+    renderHomePage(); // Ensure we are on home page
+
+    const filteredVideos = videos.filter(video =>
+        video.title.toLowerCase().includes(query) ||
+        video.channel.toLowerCase().includes(query)
+    );
+
+    const grid = document.getElementById('video-grid');
+    if (filteredVideos.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
+                <h2 style="font-size: 48px; margin-bottom: 16px;">🔍</h2>
+                <h2>No videos found for "${searchInput.value}"</h2>
+                <p style="color: var(--text-secondary); margin-top: 8px;">Try searching for something else</p>
+            </div>
+        `;
+    } else {
+        renderVideos(filteredVideos, grid);
+    }
+});
+
+// Sidebar Toggle
+const menuBtn = document.querySelector('.menu-icon');
+const sidebar = document.querySelector('.sidebar');
+
+menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+});
