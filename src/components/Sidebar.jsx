@@ -1,11 +1,11 @@
-import { Home, PlaySquare, Subscriptions, Library, History, ThumbsUp, UserCircle, ChevronRight, Video, Clock } from 'lucide-react';
+import { Home, PlaySquare, Users, Library, History, ThumbsUp, UserCircle, ChevronRight, Video, Clock } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ isCollapsed }) => {
   const mainItems = [
     { icon: <Home size={22} />, text: 'Home', path: '/' },
     { icon: <PlaySquare size={22} />, text: 'Shorts', path: '/shorts' },
-    { icon: <Subscriptions size={22} />, text: 'Subscriptions', path: '/subscriptions' },
+    { icon: <Users size={22} />, text: 'Subscriptions', path: '/subscriptions' },
   ];
 
   const youItems = [
